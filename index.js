@@ -1,16 +1,37 @@
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const keys = require('./config/keys.js');
 
 const app = express();
 
-//ClientID: 946694402490-es6mgm86d1q2vpgo70gb63oclu070c49.apps.googleusercontent.com
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback'
+    },
+    accessToken => {
+      console.log(accessToken);
+    }
+  )
+);
 
-passport.use(new GoogleStrategy());
+app.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
+  })
+);
 
-// app.get('/', (req, res) => {
-//   res.send({ hi: 'there' });
-// });
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
