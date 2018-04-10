@@ -22,10 +22,12 @@
 //
 // fetchAlbums();
 
-async function fetchAlbums() {
+const fetchAlbums = async () => {
   // await in front of anything that gives a promise
   const res = await fetch('http://rallycoding.herokuapp.com/api/music_albums');
   const json = await res.json();
 
   console.log(json);
-}
+};
+
+fetchAlbums();
