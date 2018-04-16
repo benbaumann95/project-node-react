@@ -1,6 +1,6 @@
 export default [
   {
-    label: 'Survey Title',
+    label: 'Campaign Title',
     name: 'title',
     noValueError: 'You must provide a title'
   },
