@@ -18,8 +18,8 @@ class Mailer extends helper.Mail {
   }
 
   formatAddresses(recipients) {
-    return recipients.map(({ email }) => {
-      return new helper.Email(email);
+    return recipients.map(recipient => {
+      return new helper.Email(recipient.email);
     });
   }
 
@@ -27,7 +27,7 @@ class Mailer extends helper.Mail {
     const trackingSettings = new helper.TrackingSettings();
     const clickTracking = new helper.ClickTracking(true, true);
 
-    trackingSettings.setClickTrackingh(clickTracking);
+    trackingSettings.setClickTracking(clickTracking);
     this.addTrackingSettings(trackingSettings);
   }
 
@@ -43,7 +43,7 @@ class Mailer extends helper.Mail {
   async send() {
     const request = this.sgApi.emptyRequest({
       method: 'POST',
-      path: '/v3/maik/send',
+      path: '/v3/mail/send',
       body: this.toJSON()
     });
 
