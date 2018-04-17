@@ -10,13 +10,13 @@ module.exports = app => {
     //     .send({ error: 'You must log in before adding credits' });
     // }
     const charge = await stripe.charges.create({
-      amount: 100,
+      amount: 1000,
       currency: 'usd',
       description: '$1 per credit',
       source: req.body.id
     });
 
-    req.user.credits += 1;
+    req.user.credits += 10;
     const user = await req.user.save();
 
     res.send(user);
