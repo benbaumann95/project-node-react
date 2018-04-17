@@ -6,7 +6,7 @@ module.exports = survey => {
       <body>
         <div style="text-align: center;">
           <h3>I would like your input!</h3>
-          <p>Please answer the following question:</p>
+          <p>Please provide feedback for the follwing:</p>
           <p>${survey.body}</p>
           <div>
             <a href="${keys.redirectDomain}/api/surveys/thanks">Yes</a>
